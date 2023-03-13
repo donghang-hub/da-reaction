@@ -1,0 +1,30 @@
+import scipy.io as sio
+import pandas as pd
+from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import train_test_split, cross_val_score, GridSearchCV
+from sklearn.metrics import roc_curve, auc, roc_auc_score
+import matplotlib.pyplot as plt
+
+data = sio.loadmat('')
+
+X = data['X']
+Y = data['Y']
+Y = Y.ravel()
+
+
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.3, random_state=1)
+
+
+
+
+rfc = RandomForestRegressor(n_estimators=100,
+                            criterion='mse',
+                            max_features='sqrt',
+                            min_samples_split=2,
+                            max_depth=None,
+                            )
+rfc = rfc.fit(X_train, Y_train)
+
+import joblib
+joblib.dump(rfc, "TRAIN_model766.m")
